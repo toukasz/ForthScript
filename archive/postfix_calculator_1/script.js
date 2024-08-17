@@ -10,6 +10,7 @@ const index = [];
 const words = [];
 const functions = [];
 const memory = Array.from(Array(10), item => item = null);
+const addrnames = [];
 
 input_html.addEventListener("keyup", on_enter);
 function on_enter(event) {
@@ -22,8 +23,6 @@ function input_submit(input_string) {
 	input_read(input_array);
 
 	console.log(`stack: ${stack}`);
-	console.log(`functions: ${functions}`);
-	console.log(`words: ${words}`);
 };
 
 function input_clean() { return input_html.value.split(' ').filter(word => word !== ''); };
@@ -275,8 +274,15 @@ function init_memory(input_word, input_array) { switch (input_word) {
 	case 'allot':	memory_allot();			break;
 }; };
 
-function memory_create(input_array) {};
+function memory_create(input_array) {
+	// object includes name and addr location
+	// check for already defined variables
+	// if defined, then splice to remove
+	// push object onto addrnames stack
+};
+
 function memory_fetch() {};
+
 function memory_assign() {};
 
 function memory_here() {	// ( -- addr ) return address of next free location in data space
@@ -284,8 +290,9 @@ function memory_here() {	// ( -- addr ) return address of next free location in 
 	if (i === memory.length) { stack.push(-1) } else stack.push(i);
 };
 
-function memory_unused() {
+function memory_unused() {	// ( -- addr ) return amount of free space remaining
 	let count = 0; let i = 0; while (i < memory.length) { if (memory[i] === null) count++; i++; };
 	stack.push(count);
 };
+
 function memory_allot() {};
