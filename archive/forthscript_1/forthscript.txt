@@ -1,0 +1,68 @@
+P		Program counter.
+A		General purpose read-write register.
+B		Write-only register.
+T		Top word of a data stack.
+S		Second word of a data stack.
+R		Return stack
+
+Jump Instructions
+:		Define a new word (followed by its name).
+->		Exit current word definition, set P to -2.
+<-		Jump to beggining of current word, set P to -1.
+name	Call. Fetch word and run.
+unext	Micronext. If R is zero, pop the return stack and
+		continue to next opcode. If R is nonzero... HERE!
+next	Next. If R is zero, pop the return stack. If R is non-zero,
+		decrement R by 1 and set P to T, popping the data stack.
+if		Jump to 'then' if zero.
+-if		Jump to 'then' if not negative.
+
+Memory Instructions
+@p		Fetch-P. Pushes data stack, reads [P] into T, and increments P.
+@+		Fetch-plus. Pushes data stack, reads [A] into T, increments A.
+@b		Fetch-B. Pushes data stack, reads [B] into T.
+@		Fetch. Pushes data stack, reads [A] into T.
+!p		Store-P. Write T into [P], pops the data stack, and increments P.
+!+		Store-plus. Write T into [A], pops the data stack, and increment A.
+!b		Store-B. Write T into [B], pops the data stack.
+!		Store. Writes T into [A], pops the data stack.
+
+ALU Instructions
+2*		Shift stack left.
+2/		Shift stack right.
+inv		NOT to stack.
++		Add to stack.
+and		AND to stack.
+xor		XOR to stack.
+
+Stack Instructions
+drop	Pop the data stack, dropping T.
+dup		Fetch T and push onto the data stack.
+r>		Push R onto the data stack, dropping R.
+over	Load 2nd datum onto the data stack.
+a		Fetches A onto T, pushing the data stack.
+nop		Do nothing. Spends time.
+>r		Push T onto the return stack, dropping T.
+b!		B-store. Stores T into register B, pops the data stack.
+a!		A-store. Stores T into register A, pops the data stack.
+
+
+NON-COLORFORTH ADDITIONS
+here	Push to data stack the current @p - 1
+for		Push P into R then push T into R, pops the data stack.
+
+Input output Instructions
+emit	Type ASCII character from stack.
+key		Read key, put ASCII value on stack.
+.s		Display stack.
+
+Miscellaneous Instructions
+(		Begin comment, terminated by ')'.
+
+
+: here r> dup >r -1 + ;
+: swap over >r >r drop r> r> ;
+: r r> r> dup >r swap >r ;
+: for r> dup >r swap >r >r ;
+: -> -2 r> drop >r ;
+: <- -1 r> drop >r ;
