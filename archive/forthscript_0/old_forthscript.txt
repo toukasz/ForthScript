@@ -1,0 +1,150 @@
+ForthScript GLOSSARY
+
+This glossary contains all of the word definitions in Release 1
+of ForthScript. The definition are present in no particular
+order.
+
+The first line of each entry shows a symbolic description of
+the action of the procedure on the parameter stack. The symbols
+indicate the order in which input parameters have been placed
+on the stack. Double dashes "--" indicate the execution point;
+any parameters left on the stack are listed.  In this notation,
+the top of the stack is to the right.
+
+The symbols include:
+
+x	value (number, string, etc.)
+n	number
+u	unsigned integer
+s	string
+f	boolean flag
+a	array
+
+Nearly all operations and references to numbers and strings in
+this FORTH inspired implementation do not follow the behaviours
+expected from a low level hardware perspective, rather they
+follow the highly abstracted quirks and nature expect of
+JavaScript. Therefore, functions such as addition (+) between
+a string and a number is entirely allowed.
+
+
+Stack Instructions
+
+dup	x -- x x
+	Duplicate the value on the stack.
+
+drop	x --
+	Drop the value from the stack.
+
+swap	x1 x2 -- x2 x1
+	Exchange the top two values on the stack.
+
+over	x1 x2 -- x1 x2 x1
+	Copy the second stack value, placing it as the new top.
+
+rot	x1 x2 x3 -- n2 n3 n1
+	Rotate the top three values on the stack, bringint the
+	third to the top.
+
+-dup	x -- x		(if zero)
+	x -- x x	(if non-zero)
+	Reproduce n1 only if it is non-zero. This is usually
+	used to copy a value just before IF, to eliminate the
+	need for an ELSE part to drop it.
+
+>r	x --
+	Remove a value from the computation stack and place as
+	the most accessible on the return stack. Use should be
+	balanced with R> in the same definition.
+
+r>	-- x
+	Remove the top value from the return stack and leave it
+	on the computation stack. See >R and R.
+
+r	-- x
+	Copy the top of the return stack to the computation
+	stack.
+
++	x1 x2 -- sum
+	Leave the sum of two values.
+
+-	n1 n2 -- diff
+	Leave the difference of two numbers.
+
+*	n1 n2 -- prod
+	Leave the product of two numbers.
+
+/	n1 n2 -- quot
+	Leave the quotient of two numbers.
+
+%	n1 n2 -- mod
+	Leave the remainder of two numbers.
+
+max	n1 n2 -- max
+	Leave the greater of two numbers.
+
+min	n1 n2 -- min
+	Leave the smaller of two numbers.
+
+abs	n -- u
+	Leave the absolute value of a number.
+
+neg	n1 -- n2
+	Leave the two's complement of a number.
+
+&&	x1 x2 -- x3
+	Leave the logical AND of two values.
+
+||	x1 x2 -- x3
+	Leave the logical OR of two values.
+
+^	x1 x2 -- x3
+	Leave the logical XOR of two values.
+
+<	n1 n2 -- f
+	Leave a true flag if n1 is less than n2;
+	otherwise leave a false flag.
+
+>	n1 n2 -- f
+	Leave a true flag if n1 is greater than n2;
+	otherwise leave a false flag.
+
+=	x1 x2 -- f
+	Leave a true flag if n1 is equal to n2;
+	otherwise leave a false flag.
+
+!=	x1 x2 -- 3
+	Leave a flase flag if n1 is equal to n2;
+	otherwise leave a true flag.
+
+
+Input output Instructions
+
+.	x --
+	Print value.
+
+CR	--
+	Do a carriage-return.
+
+_	Type one space.
+
+__	Type u spaces.
+
+
+Defining Instructions and Control Structure Instructions
+
+@	( a u -- x )
+	Return the value stored at the array's index.
+
+!	( x a u -- )
+	Store value at the index of a defined array.
+
+arr	( s u -- )
+	Create an array of length u with the string as its
+	name.
+
+const	( s x -- )
+	Create a constant with the string as its name and
+	return the value x when called.
+
+var	( s -- )
