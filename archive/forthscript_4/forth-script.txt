@@ -1,0 +1,115 @@
+              ==== WEB-BASED FORTH-SCRIPT v1.0 ====
+              ==== OPEN SOURCE 2024 BY T.SZULC ====
+
+Operand Keys:
+x	value (any)
+n	number
+u	unsigned integer
+s	string
+f	boolean (flag)
+
+## STACK INSTRUCTIONS ##
+DUP			( x -- x x )				Duplicate top of stack.
+DROP		( x -- )					Discard top of stack.
+SWAP		( x1 x2 -- x2 x1 )			Reverse top two stack items.
+OVER		( x1 x2 -- x1 x2 x1 )		Copy second item to top.
+ROT			( x1 x2 x3 -- x2 x3 x1 )	Rotate third item to top.
+-DUP		( n -- n ? )				Duplicate only if non-zero.
+>R			( x -- )					Move top item to return stack.
+R>			( -- x )					Retrieve item from return stack.
+R			( -- x )					Copy top of return stack onto satck.
++			( x1 x2 -- sum )			Add.
+-			( n1 n2 -- diff )			Subtract (n1-n2).
+*			( n1 n2 -- prod )			Multiply.
+/			( n1 n2 -- quot )			Divide (n1/n2).
+%			( n1 n2 -- rem )			Modulo.
+MAX			( n1 n2 -- max )			Maximum. 
+MIN			( n1 n2 -- min )			Minimum.
+ABS			( n -- absolute )			Absolute value.
+MINUS		( n -- -n )					Change sign.
+AND			( f1 f2 -- and )			Logical AND.
+OR			( f1 f2	-- or )				Logical OR.
+XOR			( f1 f2 -- xor )			Logical XOR.
+<			( n1 n2 -- f )				True if n1 less than n2.
+>			( n1 n2 -- f )				True if n1 greater than n2.
+=			( n1 n2 -- f )				True if n1 equal to n2.
+0<			( n -- f )					True if top number negative.
+0=			( n -- f )					True if top number zero.
+W"			( -- s )					Push string (no spaces) onto the stack.
+S"			( -- s )					Push long stiring onto the stack (terminated by ").
+\S			( -- s )					Push a space charcter onto the stack.
+NULL		( -- null )					Push null onto the stack.
+UNDEFINED	( -- undefined )			Push undefined onto the stack.
+
+## INPUT OUTPUT INSTRUCTIONS
+.			( n -- )					Print value.
+.S			( -- )						Print stack.
+.R			( n u -- )					Print number, right-justified in u column.
+CR			( -- )						Do a carriage-return.
+SPACE		( -- )						Type one space.
+SPACES		( u -- )					Type u spaces.
+PAGE		( -- )						Clear screen.
+."			( -- )						Print message (terminated by ").
+DUMP		( addr u -- )				Dump u cells starting at address.
+TYPE		( addr u -- )				Type u cells starting at address.
+ACCEPT		( addr -- )					Read characters (until carriage-return)
+										from input device to address.
+
+## MEMORY AND DICTIONARY INSTRUCTIONS
+@			( addr -- n )				Replace word address by contents.
+!			( n addr -- )				Store second word at address on top.
+?			( addr -- )					Print contents of address.
++!			( x addr -- )				Add second value to contents of address.
+MOVE		( from to u -- )			Move u cells in memory.
+FILL		( addr u x -- )				Fill u cells in memory with x value beginning at address.
+ERASE		( addr u -- )				Fill u cells in memory with undefined.
+HERE		( u -- addr )				Return first empty address that is u rows long.
+ALLOT		( addr u -- )				Fill u cells in memory with null.
+,			( x -- )					Compile x into memory.
+FORGET		( -- )						Forget a user definition.
+FORGET!		( -- )						Forget all user definitions.
+WORDS		( -- )						Output all words.
+SEE			( -- )						See the definition of a word.
+
+## DEFINING INSTRUCTIONS AND CONTROL STRUCTURE INSTRUCTIONS
+:			( -- )						Begin a colon definition. Turn on compile mode.
+;			( -- )						End of a colon definition. Turn off compile mode.
+VAR			( x -- )					Create a variable with initial value n.
+			( -- addr )					Return address when executed.
+CONST		( n -- )					Create a constant with value n.
+			( -- n )					Return the value n when executed.
+FUNC		( -- )						Define a JavaScript function.
+CODE		( -- )						Create a JavaScript definition.
+;CODE		( -- )						End of a JavaScript definition.
+DO			( end start -- )			Set up loop, given index range.
+LOOP		( -- )						Increment index, terminate loop if equal to limit.
++LOOP		( n -- )					Increment index by n, Terminate loop if outside.
+I			( -- index )				Place loop index on stack.
+LEAVE		( -- )						Terminate loop at next LOOP or +LOOP.
+IF			( f -- )					If top of stack is true, execute true clause.
+ELSE		( -- )						Begining of the false clause.
+THEN		( -- )						End of the IF-ELSE structure.
+BEGIN		( -- )						Start an indefinite loop.
+UNTIL		( f -- )					Loop back to BEGIN until f is true.
+REPEAT		( -- )						Loop back to BEGIN unconditionally.
+WHILE		( f -- )					Exit loop immediately if f is false.
+
+## MISCELLANEOUS INSTRUCTIONS
+(			( -- )						Begin comment, terminated by ).
+ABORT		( -- )						Error termination of execution.
+SP@			( -- addr )					Return address of top stack item.
+UPDATE		( -- )						Update screen.
+
+## EXTENDED ##
+TUCK		( x1 x2 -- x2 x1 x2 )		Copy first item to below second item.
+NIP			( x1 x2 -- x2 )				Discard second item.
+FLOOR		( n -- )					Round down to an integer.
+CEIL		( n -- )					Round up to an integer.
+ROUND		( n -- )					Round to nearest integer.
+RANDOM		( -- n )					Return random number between 0 and 1.
+FWORDS		( -- )						Output all forth words.
+UWORDS		( -- )						Output all user words.
+
+
+Notes:
+If ESC is press, execute terminate/error function.

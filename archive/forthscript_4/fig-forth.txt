@@ -1,0 +1,137 @@
+              ==== WEB-BASED FORTH-SCRIPT v1.0 ====
+              ==== OPEN SOURCE 2024 BY T.SZULC ====
+
+Operand Keys:
+n	integer
+u	unsigned integer
+addr	address
+c	ascii character
+f	boolean flag
+s	string
+
+## STACK INSTRUCTIONS ##
+DUP	( n -- n n )		Duplicate top of stack.
+DROP	( n -- )		Discard top of stack.
+SWAP	( n1 n2 -- n2 n1 )	Reverse top two stack items.
+OVER	( n1 n2 -- n1 n2 n1 )	Copy second item to top.
+ROT	( n1 n2 n3 -- n2 n3 n1)	Rotate third item to top.
+-DUP	( n -- n ? )		Duplicate only if non-zero.
+>R	( n -- )		Move top item to return stack.
+R>	( -- n )		Retrieve item from return stack.
+R	( -- n )		Copy top of return stack onto stack.
++	( n1 n2 -- sum )	Add.
+-	( n1 n2 -- diff )	Subtract (n1-n2).
+*	( n1 n2 -- prod )	Multiply.
+/	( n1 n2 -- quot )	Divide (n1/n2).
+%	( n1 n2 -- rem )	Modulo (remainder from division).
+MAX	( n1 n2 -- max )	Maximum.
+MIN	( n1 n2 -- min )	Minimum.
+ABS	( n -- absolute )	Absolute value.
+MINUS	( n -- -n )		Change sign.
+AND	( f1 f2 -- and )	Logical AND.
+OR	( f1 f2 -- or )		Logical OR.
+XOR	( f1 f2 -- xor )	Logical XOR.
+<	( n1 n2 -- f )		True if n1 less than n2.
+>	( n1 n2 -- f )		True if n1 greater than n2.
+=	( n1 n2 -- f )		True if n1 equal to n2.
+0<	( n -- f )		True if top number negative.
+0=	( n -- f )		True if top number zero.
+W"	( -- s )		Push word onto stack.
+S"	( -- s )		Push string with spaces onto stack.
+
+## INPUT OUTPUT INSTRUCTIONS ##
+.	( n -- )		Print number.
+.S	( -- )			Print stack.
+.R	( n u -- )		Print number , right-justified in u column.
+CR	( -- )			Do a carriage-return.
+SPACE	( -- )			Type one space.
+SPACES	( u -- )		Type u spaces.
+."	( -- )			Print message (terminated by ").
+DUMP	( addr u - )		Dump u numbers starting at address.
+TYPE	( addr u - )		Type u characters starting at address.
+KEY	( -- c )		Read key, put ASCII value on stack.
+EMIT	( c -- )		Read key, put ASCII value on stack.
+EXPECT	( addr u -- )		Read u characters (or until carriage-return)
+				from input device to address.
+
+## MEMORY AND DICTIONARY INSTRUCTIONS ##
+@	( addr -- n )		Replace word address by contents.
+!	( n addr -- )		Store second word at address on top.
+C@	( addr -- b )		Fetch one byte only.
+C!	( addr -- b )		Store one byte only.
+?	( addr -- )		Print contents of address.
++!	( n addr -- )		Add number to contents of address.
+MOVE	( from to u -- )	Move u bytes in memory.
+FILL	( addr u b -- )		Fill u bytes in memory with b beggining at address.
+ERASE	( addr u -- )		Fill u bytes in memory with zeros.
+BLANKS	( addr u -- )		Fill u bytes in memory with blanks.
+HERE	( -- addr )		Return next avaliable address.
+PAD	( -- addr )		Return address of scratch area.
+ALLOT	( u -- )		Leave a gap of n bytes in the dictionary
+,	( n -- )		Compile number n into the dictionary.
+'	( -- addr )		Find address of next string in dictonary.
+FORGET	( -- )			Delete all definitions above and including the following definiton.
+WORDS	( -- )			Print all words in the dictionary.
+SEE	( -- )			Print the source definition of a word.
+
+## DEFINING INSTRUCTIONS AND CONTROL STRUCTURE INSTRUCTIONS ##
+:	( -- )			Begin a colon definition.
+;	( -- )			End of a colon definition.
+VAR	( n -- )		Create a variable with initial value n.
+	( -- addr )		Return address when executed.
+CONST	( n -- )		Create a constant with value n.
+	( -- n )		Return the value n when executed.
+FUNC	( -- )			Call a JavaScript function and define it as a forth word.
+:CODE	( -- )			Begin JavaScript definition.
+;CODE	( -- )			End JavaScript definition.
+DO	( end+1 start - )	Set up loop, given index range.
+LOOP	( -- )			Increment index, terminate loop if equal to limit.
++LOOP	( n -- )		Increment index by n. Terminate loop if outside limit.
+I	( -- )			Place loop index on stack.
+LEAVE	( -- )			Terminate loop at next LOOP or +LOOP.
+IF	( f -- )		If top of stack is true, execute true clause.
+ELSE	( -- )			Beginning of the false clause.
+THEN	( -- )			End of the IF-ELSE structure.
+BEGIN	( -- )			Start an indefinite loop.
+UNTIL	( f -- )		Loop back to BEGIN until f is true.
+REPEAT	( -- )			Loop back to BEGIN unconditionally.
+WHILE	( f -- )		Exit loop immediately if f is false.
+
+## MISCELLANEOUS INSTRUCTIONS
+(	( -- )			Begin comment, terminated by ).
+ABORT	( -- )			Error termination of execution.
+SP@	( -- addr )		Return address of top stack item.
+
+## SYSTEM CONSTANTS
+FIRST	( -- addr )		Address of the first byte of memory.
+LIMIT	( -- addr )		Address of the last byte of memory.
+C/L	( -- u )		64. Characters per line of input text.
+BL	( -- u )		32. ASCII blank.
+
+
+## TEXT INTERPRETER
+# (FORTH LOOP)
+COLD		Clear everything in memory.
+ABORT		Clear data stack.
+QUIT		Clear input line.
+		Clear return stack.
+		Set STATE=0.
+INTERPRET	Parse text. Execute or compile.
+ERROR?		If YES goto ABORT
+STATE=0?	If NO goto QUIT
+TYPE OK		Goto QUIT
+
+
+## INTERACTIVE DEVELOPMENT ENVIROMENT
+Multiline Editor
+Command Line Interface
+Live data stack view
+Live user word list view
+List all forth words.
+
+
+## EXTENDED LIBRARY ##
+# STACK INSTRUCTIONS #
+TRUE	( -- f )		Push true onto the stack.
+FALSE	( -- f )		Push false onto the stack.
+PAGE	( -- )			Clear screen.
