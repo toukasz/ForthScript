@@ -255,16 +255,6 @@ const ops = [{
     name: '.c',
     exec: () => process.stdout.write(String.fromCharCode(d.pop()))
 }, {
-    name: '.s',
-    exec: () => process.stdout.write(`${d.stack.join(' ')} ${S} ${T} `)
-}, {
-    name: 'words',
-    exec: () => process.stdout.write(ops.map(obj => obj.name).join(' ')
-        + ' ' + dict.map(obj => obj.name).join(' ') + ' ')
-}, {
-    name: 'forget',
-    exec: () => {}
-}, {
     name: 'include',
     exec: chunk => {
         const name = chunk.at(P += 1)
