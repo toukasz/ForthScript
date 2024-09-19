@@ -1,5 +1,0 @@
-Ideas:
-- gives you information on the word you're currently typing
-- dynamic console output
-- display output
-- read from keyboard

@@ -1,4 +1,0 @@
-Add 'see' word definition.
-Add 'words' list
-Add 'forget' word or all
-Add '.s' and '.r'
