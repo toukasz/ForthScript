@@ -77,3 +77,15 @@
 : .s >r >r >r >r space dup . space r> dup . space
 	 r> dup . space r> dup . space r> dup . space
 ; ( -- )
+
+
+: intro
+( ForthScript 0.1.0, Open Source (2024) by T. Szulc )
+( Type 'bye' to exit )
+70 .e 111 .e 114 .e 116 .e 104 .e 83 .e 99 .e 114 .e 105 .e 112 .e 116 .e 32 .e
+48 .e 46 .e 49 .e 46 .e 48 .e 44 .e 32 .e 79 .e 112 .e 101 .e 110 .e 32 .e 83
+.e 111 .e 117 .e 114 .e 99 .e 101 .e 32 .e 40 .e 50 .e 48 .e 50 .e 52 .e 41 .e
+32 .e 98 .e 121 .e 32 .e 84 .e 46 .e 32 .e 83 .e 122 .e 117 .e 108 .e 99 .e 10
+.e 84 .e 121 .e 112 .e 101 .e 32 .e 39 .e 98 .e 121 .e 101 .e 39 .e 32 .e 116
+.e 111 .e 32 .e 101 .e 120 .e 105 .e 116 .e 10 .e
+; intro

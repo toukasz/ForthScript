@@ -86,8 +86,9 @@ function read(word, chunk) {
 let abort = false
 function error(msg, chunk) {
     abort = true
-    chunk[P] = `>>>${chunk.at(P)}<<<`
-    console.error(`\n${msg}\n${chunk.join(' ')}`)
+    const string = [...chunk]
+    string[P] = `>>>${chunk.at(P)}<<<`
+    console.error(`\n${msg}\n${string.join(' ')}`)
     d.stack.fill(0)
     r.stack.fill(0)
     P = 0
@@ -249,7 +250,11 @@ const ops = [{
 }, {
 // Miscellaneous
     name: '(', // include case where there's not closing token
-    exec: chunk => P += chunk.slice(P).findIndex(word => word == ')')
+    exec: chunk => {
+        const i = chunk.slice(P).findIndex(word => word == ')')
+        if ( i == -1 ) return error("Missing ')' token", chunk)
+        P += i
+    }
 }, {
     name: '.',
     exec: () => process.stdout.write(d.pop().toString())
@@ -273,11 +278,6 @@ const ops = [{
 }]
 
 // I.O. Interface
-process.stdout.write(
-`ForthScript 0.1.0, Open Source (2024) by T. Szulc
-Type 'bye' to exit
-`)
-
 const rl = require('readline').createInterface({
     input:  process.stdin,
     output: process.stdout,

@@ -1,9 +1,14 @@
-# jForth
+# ForthScript
 
 My own spinoff Forth-esque dialect heavily based upon Chuck Moore's work.
 Written entirely in JavaScript for the purposes of embedded browser
 applications. Goal of this work is making the ideas in forth as readily
 accessible as possible to the intrigued user.
+
+![CLI](https://i.imgur.com/4JRxLn3.png)
+
+![Editor](https://i.imgur.com/2dkv0Zn.png)
+
 
 In this implimentation the language consists of *only* 31 or so "words", also
 known as "primitives". They are based upon, but not strictly following, the F18
@@ -75,4 +80,29 @@ Download the project then run:
 
 ```bash
 node fs.js
+```
+
+If you want to turn it into an executable. Make sure the following
+shebang line is included at top of the `jforth.js` file.
+
+```javascript
+#!/usr/bin/env node
+```
+
+Then make this file executable by changing the permission of the file.
+
+```bash
+chmod +x script.js
+```
+
+And move it into your preferred $PATH.
+
+```bash
+sudo mv jforth.js /usr/local/bin/jforth
+```
+
+Now you should be able to run ForthScript from anywhere.
+
+```bash
+jforth
 ```
