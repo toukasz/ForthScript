@@ -1,3 +1,10 @@
+( Square Root )
+: sqrt ( n -- sqrt )
+  ( init ) dup
+  ( loop ) !< 2dup / over + 2/ swap over - abs 2 <
+           if drop nip -> then drop <-
+;
+
 ( Fibonacci Generator )
 
 : print 10 .e dup . ; ( -- )
