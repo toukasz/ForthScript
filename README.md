@@ -89,13 +89,13 @@ shebang line is included at top of the `jforth.js` file.
 #!/usr/bin/env node
 ```
 
-Then make this file executable by changing the permission of the file.
+Change the permission of the file.
 
 ```bash
 chmod +x script.js
 ```
 
-And move it into your preferred $PATH.
+Move it into your preferred $PATH.
 
 ```bash
 sudo mv jforth.js /usr/local/bin/jforth
