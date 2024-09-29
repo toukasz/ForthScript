@@ -33,6 +33,8 @@
 : 0< -if drop 0 -> then drop -1 ;           ( n -- f )
 : 0= if -> then drop -1 ;                   ( n -- f )
 : 0> negate -if drop 0 -> then drop -1 ;    ( n -- f )
+: true   0 ;                                ( -- f )
+: false -1 ;                                ( -- f )
 
 ( ARITHMETIC AND LOGICAL )
 : - inv + 1 + ;                                             ( n1 n2 -- diff )
@@ -78,6 +80,26 @@
 	 r> dup . space r> dup . space r> dup . space
 ; ( -- )
 
+: help
+( Please check the README.md for more information. )
+( There is a good chance everything is not well documented yet, )
+( so, apologies in advance. )
+80 emit 108 emit 101 emit 97 emit 115 emit 101 emit 32 emit 99 emit 104 emit
+101 emit 99 emit 107 emit 32 emit 116 emit 104 emit 101 emit 32 emit 82 emit 69
+emit 65 emit 68 emit 77 emit 69 emit 46 emit 109 emit 100 emit 32 emit 102 emit
+111 emit 114 emit 32 emit 109 emit 111 emit 114 emit 101 emit 32 emit 105 emit
+110 emit 102 emit 111 emit 114 emit 109 emit 97 emit 116 emit 105 emit 111 emit
+110 emit 46 emit 32 emit 84 emit 104 emit 101 emit 114 emit 101 emit 32 emit
+105 emit 115 emit 32 emit 97 emit 32 emit 103 emit 111 emit 111 emit 100 emit
+32 emit 99 emit 104 emit 97 emit 110 emit 99 emit 101 emit 32 emit 101 emit 118
+emit 101 emit 114 emit 121 emit 116 emit 104 emit 105 emit 110 emit 103 emit 32
+emit 105 emit 115 emit 32 emit 110 emit 111 emit 116 emit 32 emit 119 emit 101
+emit 108 emit 108 emit 32 emit 100 emit 111 emit 99 emit 117 emit 109 emit 101
+emit 110 emit 116 emit 101 emit 100 emit 32 emit 121 emit 101 emit 116 emit 44
+emit 32 emit 115 emit 111 emit 44 emit 32 emit 97 emit 112 emit 111 emit 108
+emit 111 emit 103 emit 105 emit 101 emit 115 emit 32 emit 105 emit 110 emit 32
+emit 97 emit 100 emit 118 emit 97 emit 110 emit 99 emit 101 emit 46 emit 
+;
 
 : intro
 ( ForthScript 0.1.0, Open Source (2024) by T. Szulc )
