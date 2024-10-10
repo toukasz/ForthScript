@@ -113,8 +113,16 @@ jforth
 ```forth
 ( Fibonacci Generator )
 
-: print ( -- )
+: print ( n -- n )
   10 .e dup .
+;
+
+: swap ( n1 n2 -- n2 n1 )
+  over >r nip r>
+;
+
+: rot ( n1 n2 n3 -- n2 n3 n1 )
+  >r swap r> swap
 ;
 
 : 2dup ( n1 n2 -- n1 n2 n1 n2 )
