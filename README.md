@@ -106,3 +106,20 @@ Now you should be able to run ForthScript from anywhere.
 ```bash
 jforth
 ```
+
+
+## Example Program
+
+```forth
+( Fibonacci Generator )
+
+: print ( -- )
+  10 .e dup .
+;
+
+: fib ( u -- )
+  >r 0 1 r>
+  for print 2dup + rot drop next
+  2drop
+;
+```
