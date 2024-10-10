@@ -117,6 +117,14 @@ jforth
   10 .e dup .
 ;
 
+: 2dup ( n1 n2 -- n1 n2 n1 n2 )
+  over over
+;
+
+: 2drop ( n1 n2 -- )
+  drop drop
+;
+
 : fib ( u -- )
   >r 0 1 r>
   for print 2dup + rot drop next
